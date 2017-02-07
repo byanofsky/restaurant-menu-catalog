@@ -21,6 +21,7 @@ class Restaurant(Base):
     def get_all(cls):
         return db_session.query(Restaurant).all()
 
+
 class MenuItem(Base):
     __tablename__ = 'menu-items'
     id = Column(Integer, Sequence('menu_item_id_seq'), primary_key=True)
