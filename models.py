@@ -9,6 +9,11 @@ class Restaurant(Base):
     name = Column(String, nullable=False)
 
     @classmethod
+    def create(cls, name):
+        db_session.add(Restaurant(name=name))
+        return db_session.commit()
+
+    @classmethod
     def get_by_id(cls, id):
         return db_session.query(Restaurant).filter(Restaurant.id == id).one()
 

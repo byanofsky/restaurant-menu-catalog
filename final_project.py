@@ -40,8 +40,7 @@ def single_restaurant(restaurant_id):
 def new_restaurant():
     if request.method == 'POST':
         restaurant_name = request.form['restaurant_name']
-        db_session.add(Restaurant(name=restaurant_name))
-        db_session.commit()
+        Restaurant.create(restaurant_name)
         return redirect(url_for('all_restaurants'))
     else:
         return render_template('new-restaurant.html')
