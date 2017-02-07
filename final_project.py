@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from database import db_session
+from models import Restaurant, MenuItem
 
 app = Flask(__name__)
 
@@ -22,6 +23,7 @@ item =  {'name':'Cheese Pizza','description':'made with fresh cheese','price':'$
 @app.route('/')
 @app.route('/restaurants/')
 def all_restaurants():
+    restaurants = db_session.query(Restaurant).all()
     return render_template('all-restaurants.html', restaurants=restaurants)
 
 
@@ -34,9 +36,15 @@ def single_restaurant(restaurant_id):
                            menu_items=menu_items)
 
 
-@app.route('/restaurant/new/')
+@app.route('/restaurant/new/', methods=['GET', 'POST'])
 def new_restaurant():
-    return render_template('new-restaurant.html')
+    if request.method == 'POST':
+        restaurant_name = request.form['restaurant_name']
+        db_session.add(Restaurant(name=restaurant_name))
+        db_session.commit()
+        return redirect(url_for('all_restaurants'))
+    else:
+        return render_template('new-restaurant.html')
 
 
 @app.route('/restaurant/<int:restaurant_id>/edit/')
