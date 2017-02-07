@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Sequence, ForeignKey
-from database import Base
+from database import Base, db_session
 from sqlalchemy.orm import relationship
 
 
@@ -7,6 +7,10 @@ class Restaurant(Base):
     __tablename__ = 'restaurants'
     id = Column(Integer, Sequence('restaurant_id_seq'), primary_key=True)
     name = Column(String, nullable=False)
+
+    @classmethod
+    def get_by_id(cls, id):
+        return db_session.query(Restaurant).filter(Restaurant.id == id).one()
 
 
 class MenuItem(Base):

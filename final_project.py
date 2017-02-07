@@ -29,9 +29,7 @@ def all_restaurants():
 
 @app.route('/restaurant/<int:restaurant_id>/')
 def single_restaurant(restaurant_id):
-    restaurant = db_session.query(Restaurant)\
-                           .filter(Restaurant.id == restaurant_id)\
-                           .one()
+    restaurant = Restaurant.get_by_id(restaurant_id)
     menu_items = db_session.query(MenuItem)\
                            .filter(MenuItem.restaurant_id == restaurant_id)\
                            .all()
