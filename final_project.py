@@ -28,7 +28,7 @@ def single_restaurant(restaurant_id):
 
 @app.route('/restaurant/new/')
 def new_restaurant():
-    return "This page creates a new restaurant"
+    return render_template('new-restaurant.html')
 
 
 @app.route('/restaurant/<int:restaurant_id>/edit/')
