@@ -62,7 +62,11 @@ def edit_menu_item(restaurant_id, menu_item_id):
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/delete/')
 def delete_menu_item(restaurant_id, menu_item_id):
-    return "This page deletes a menu item"
+    restaurant = restaurants[restaurant_id]
+    menu_item = items[menu_item_id]
+    return render_template('delete-menu-item.html',
+                           restaurant=restaurant,
+                           menu_item=menu_item)
 
 if __name__ == "__main__":
     app.config.update(
