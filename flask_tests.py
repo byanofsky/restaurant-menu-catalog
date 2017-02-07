@@ -31,6 +31,8 @@ class final_projectTestCase(unittest.TestCase):
         assert b'<h1>Edit ' in rv.data
         rv = self.app.get('/restaurant/1/delete/')
         assert b"Are you sure you'd like to delete" in rv.data
+        rv = self.app.get('/restaurant/1/menu/new/')
+        assert b"New Menu Item" in rv.data
 
 
 if __name__ == '__main__':

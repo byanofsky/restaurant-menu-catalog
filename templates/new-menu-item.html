@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}New Menu Item{% endblock %}
+{% block content %}
+    <h2>{{ restaurant.name }}</h2>
+    <h1>New Menu Item</h1>
+    <form action="" method="post">
+        <label>
+            Name
+            <input type="text" name="menu_item_name" value="">
+        </label>
+        <input type="submit" name="" value="Create">
+    </form>
+    <a href="#">Cancel</a>
+{% endblock %}
