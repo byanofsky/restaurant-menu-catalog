@@ -22,3 +22,9 @@ class MenuItem(Base):
     restaurant_id = Column(Integer, ForeignKey('restaurants.id'))
 
     restaurant = relationship(Restaurant)
+
+    @classmethod
+    def get_by_restaurant_id(cls, restaurant_id):
+        return db_session.query(MenuItem)\
+                         .filter(MenuItem.restaurant_id == restaurant_id)\
+                         .all()

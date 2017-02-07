@@ -30,9 +30,7 @@ def all_restaurants():
 @app.route('/restaurant/<int:restaurant_id>/')
 def single_restaurant(restaurant_id):
     restaurant = Restaurant.get_by_id(restaurant_id)
-    menu_items = db_session.query(MenuItem)\
-                           .filter(MenuItem.restaurant_id == restaurant_id)\
-                           .all()
+    menu_items = MenuItem.get_by_restaurant_id(restaurant_id)
     return render_template('single-restaurant.html',
                            restaurant=restaurant,
                            menu_items=menu_items)
