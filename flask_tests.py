@@ -24,15 +24,15 @@ class final_projectTestCase(unittest.TestCase):
         rv = self.app.get('/restaurants/')
         assert b'All Restaurants' in rv.data
         rv = self.app.get('/restaurant/1/')
-        assert b'Edit Restaurant Name' in rv.data
+        assert b'<h1>Blue Burgers</h1>' in rv.data
         rv = self.app.get('/restaurant/new/')
         assert b'New Restaurant' in rv.data
         rv = self.app.get('/restaurant/1/edit/')
-        assert b'<h1>Edit ' in rv.data
+        assert b'<h1>Edit Blue Burgers</h1>' in rv.data
         rv = self.app.get('/restaurant/1/delete/')
-        assert b"Are you sure you'd like to delete" in rv.data
+        assert b'Are you sure you\'d like to delete "Blue Burgers"?' in rv.data
         rv = self.app.get('/restaurant/1/menu/new/')
-        assert b"New Menu Item" in rv.data
+        assert b"<h1>New Menu Item</h1>" in rv.data
 
 
 if __name__ == '__main__':

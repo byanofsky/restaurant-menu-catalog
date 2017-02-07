@@ -21,6 +21,7 @@ def all_restaurants():
 
 @app.route('/restaurant/<int:restaurant_id>/')
 def single_restaurant(restaurant_id):
+    restaurant = restaurants[restaurant_id]
     return render_template('single-restaurant.html',
                            restaurant=restaurant,
                            menu_items=items)
@@ -33,16 +34,19 @@ def new_restaurant():
 
 @app.route('/restaurant/<int:restaurant_id>/edit/')
 def edit_restaurant(restaurant_id):
+    restaurant = restaurants[restaurant_id]
     return render_template('edit-restaurant.html', restaurant=restaurant)
 
 
 @app.route('/restaurant/<int:restaurant_id>/delete/')
 def delete_restaurant(restaurant_id):
+    restaurant = restaurants[restaurant_id]
     return render_template('delete-restaurant.html', restaurant=restaurant)
 
 
 @app.route('/restaurant/<int:restaurant_id>/menu/new/')
 def new_menu_item(restaurant_id):
+    restaurant = restaurants[restaurant_id]
     return render_template('new-menu-item.html', restaurant=restaurant)
 
 
