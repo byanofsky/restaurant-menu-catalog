@@ -29,6 +29,9 @@ class final_projectTestCase(unittest.TestCase):
         assert b'New Restaurant' in rv.data
         rv = self.app.get('/restaurant/1/edit/')
         assert b'<h1>Edit ' in rv.data
+        rv = self.app.get('/restaurant/1/delete/')
+        assert b"Are you sure you'd like to delete" in rv.data
+
 
 if __name__ == '__main__':
     unittest.main()

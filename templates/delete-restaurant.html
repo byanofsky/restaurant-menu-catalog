@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Delete {{ restaurant.name }}{% endblock %}
+{% block content %}
+    <h1>Delete {{ restaurant.name }}</h1>
+    <p>
+        Are you sure you'd like to delete "{{ restaurant.name }}"?
+    </p>
+    <form action="" method="post">
+        <input type="submit" name="" value="Confirm">
+    </form>
+    <a href="#">Cancel</a>
+{% endblock %}
