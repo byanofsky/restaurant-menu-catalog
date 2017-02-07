@@ -9,7 +9,7 @@ class Restaurant(Base):
     name = Column(String, nullable=False)
 
 
-class MenuItems(Base):
+class MenuItem(Base):
     __tablename__ = 'menu-items'
     id = Column(Integer, Sequence('menu_item_id_seq'), primary_key=True)
     name = Column(String, nullable=False)
