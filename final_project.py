@@ -23,7 +23,7 @@ item =  {'name':'Cheese Pizza','description':'made with fresh cheese','price':'$
 @app.route('/')
 @app.route('/restaurants/')
 def all_restaurants():
-    restaurants = db_session.query(Restaurant).all()
+    restaurants = Restaurant.get_all()
     return render_template('all-restaurants.html', restaurants=restaurants)
 
 

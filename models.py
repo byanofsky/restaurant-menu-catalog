@@ -17,6 +17,9 @@ class Restaurant(Base):
     def get_by_id(cls, id):
         return db_session.query(Restaurant).filter(Restaurant.id == id).one()
 
+    @classmethod
+    def get_all(cls):
+        return db_session.query(Restaurant).all()
 
 class MenuItem(Base):
     __tablename__ = 'menu-items'
