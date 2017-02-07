@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}All Restaurants{% endblock %}
+{% block content %}
+    <h1>All Restaurants</h1>
+    {% for r in restaurants %}
+        <div>
+            <h3>{{ r.name }}</h3>
+            <a href="#">Edit</a>
+            <a href="#">Delete</a>
+        </div>
+    {%endfor %}
+{% endblock %}
