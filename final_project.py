@@ -16,13 +16,14 @@ item =  {'name':'Cheese Pizza','description':'made with fresh cheese','price':'$
 @app.route('/')
 @app.route('/restaurants/')
 def all_restaurants():
-    # return "This page shows all restaurants"
     return render_template('all-restaurants.html', restaurants=restaurants)
 
 
 @app.route('/restaurant/<int:restaurant_id>/')
 def single_restaurant(restaurant_id):
-    return "This page displays a menu from one restaurant"
+    return render_template('single-restaurant.html',
+                           restaurant=restaurant,
+                           menu_items=items)
 
 
 @app.route('/restaurant/new/')
