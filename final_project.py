@@ -22,9 +22,10 @@ def all_restaurants():
 @app.route('/restaurant/<int:restaurant_id>/')
 def single_restaurant(restaurant_id):
     restaurant = restaurants[restaurant_id]
+    menu_items = items
     return render_template('single-restaurant.html',
                            restaurant=restaurant,
-                           menu_items=items)
+                           menu_items=menu_items)
 
 
 @app.route('/restaurant/new/')
@@ -52,7 +53,11 @@ def new_menu_item(restaurant_id):
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/edit/')
 def edit_menu_item(restaurant_id, menu_item_id):
-    return "This page edits a menu item"
+    restaurant = restaurants[restaurant_id]
+    menu_item = items[menu_item_id]
+    return render_template('edit-menu-item.html',
+                           restaurant=restaurant,
+                           menu_item=menu_item)
 
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/delete/')
