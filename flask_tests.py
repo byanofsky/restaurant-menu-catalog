@@ -27,6 +27,8 @@ class final_projectTestCase(unittest.TestCase):
         assert b'Edit Restaurant Name' in rv.data
         rv = self.app.get('/restaurant/new/')
         assert b'New Restaurant' in rv.data
+        rv = self.app.get('/restaurant/1/edit/')
+        assert b'<h1>Edit ' in rv.data
 
 if __name__ == '__main__':
     unittest.main()
