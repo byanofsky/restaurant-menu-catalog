@@ -13,6 +13,10 @@ class Restaurant(Base):
         db_session.add(self)
         db_session.commit()
 
+    def delete(self):
+        db_session.delete(self)
+        db_session.commit()
+
     @classmethod
     def create(cls, name):
         db_session.add(Restaurant(name=name))
