@@ -47,10 +47,17 @@ def new_restaurant():
         return render_template('new-restaurant.html')
 
 
-@app.route('/restaurant/<int:restaurant_id>/edit/')
+@app.route('/restaurant/<int:restaurant_id>/edit/',
+           methods=['GET', 'POST'])
 def edit_restaurant(restaurant_id):
     restaurant = Restaurant.get_by_id(restaurant_id)
-    return render_template('edit-restaurant.html', restaurant=restaurant)
+    if request.method == 'POST':
+        restaurant_name = request.form['restaurant_name']
+        restaurant.update(name=restaurant_name)
+        return redirect(url_for('single_restaurant',
+                                restaurant_id=restaurant.id))
+    else:
+        return render_template('edit-restaurant.html', restaurant=restaurant)
 
 
 @app.route('/restaurant/<int:restaurant_id>/delete/')
