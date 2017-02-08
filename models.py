@@ -41,6 +41,13 @@ class MenuItem(Base):
 
     restaurant = relationship(Restaurant)
 
+    def update(self, name, description, price):
+        self.name = name
+        self.description = description
+        self.price = price
+        db_session.add(self)
+        db_session.commit()
+
     @classmethod
     def create(cls, name, description, price, restaurant_id):
         db_session.add(
