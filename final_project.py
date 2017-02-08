@@ -54,8 +54,7 @@ def edit_restaurant(restaurant_id):
     if request.method == 'POST':
         restaurant_name = request.form['restaurant_name']
         restaurant.update(name=restaurant_name)
-        return redirect(url_for('single_restaurant',
-                                restaurant_id=restaurant.id))
+        return redirect(url_for('all_restaurants'))
     else:
         return render_template('edit-restaurant.html', restaurant=restaurant)
 
