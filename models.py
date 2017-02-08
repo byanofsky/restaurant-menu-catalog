@@ -33,6 +33,24 @@ class MenuItem(Base):
     restaurant = relationship(Restaurant)
 
     @classmethod
+    def create(cls, name, description, price, restaurant_id):
+        db_session.add(
+            MenuItem(
+                name=name,
+                description=description,
+                price=price,
+                restaurant_id=restaurant_id
+            )
+        )
+        return db_session.commit()
+
+    @classmethod
+    def get_by_id(cls, id):
+        return db_session.query(MenuItem)\
+                         .filter(MenuItem.id == id)\
+                         .one()
+
+    @classmethod
     def get_by_restaurant_id(cls, restaurant_id):
         return db_session.query(MenuItem)\
                          .filter(MenuItem.restaurant_id == restaurant_id)\

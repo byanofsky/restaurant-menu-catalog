@@ -36,7 +36,8 @@ def single_restaurant(restaurant_id):
                            menu_items=menu_items)
 
 
-@app.route('/restaurant/new/', methods=['GET', 'POST'])
+@app.route('/restaurant/new/',
+           methods=['GET', 'POST'])
 def new_restaurant():
     if request.method == 'POST':
         restaurant_name = request.form['restaurant_name']
@@ -58,16 +59,29 @@ def delete_restaurant(restaurant_id):
     return render_template('delete-restaurant.html', restaurant=restaurant)
 
 
-@app.route('/restaurant/<int:restaurant_id>/menu/new/')
+@app.route('/restaurant/<int:restaurant_id>/menu/new/',
+           methods=['GET', 'POST'])
 def new_menu_item(restaurant_id):
-    restaurant = Restaurant.get_by_id(restaurant_id)
-    return render_template('new-menu-item.html', restaurant=restaurant)
-
+    if request.method == 'POST':
+        menu_item_name = request.form['menu_item_name']
+        menu_item_description = request.form['menu_item_description']
+        menu_item_price = request.form['menu_item_price']
+        MenuItem.create(
+            name=menu_item_name,
+            description=menu_item_description,
+            price=menu_item_price,
+            restaurant_id=restaurant_id
+        )
+        return redirect(url_for('single_restaurant',
+                                restaurant_id=restaurant_id))
+    else:
+        restaurant = Restaurant.get_by_id(restaurant_id)
+        return render_template('new-menu-item.html', restaurant=restaurant)
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/edit/')
 def edit_menu_item(restaurant_id, menu_item_id):
     restaurant = Restaurant.get_by_id(restaurant_id)
-    menu_item = items[menu_item_id]
+    menu_item = MenuItem.get_by_id(menu_item_id)
     return render_template('edit-menu-item.html',
                            restaurant=restaurant,
                            menu_item=menu_item)
@@ -76,7 +90,7 @@ def edit_menu_item(restaurant_id, menu_item_id):
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/delete/')
 def delete_menu_item(restaurant_id, menu_item_id):
     restaurant = Restaurant.get_by_id(restaurant_id)
-    menu_item = items[menu_item_id]
+    menu_item = MenuItem.get_by_id(menu_item_id)
     return render_template('delete-menu-item.html',
                            restaurant=restaurant,
                            menu_item=menu_item)
