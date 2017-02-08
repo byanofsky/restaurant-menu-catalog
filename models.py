@@ -48,6 +48,10 @@ class MenuItem(Base):
         db_session.add(self)
         db_session.commit()
 
+    def delete(self):
+        db_session.delete(self)
+        db_session.commit()
+
     @classmethod
     def create(cls, name, description, price, restaurant_id):
         db_session.add(
