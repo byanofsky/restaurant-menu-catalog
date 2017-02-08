@@ -113,13 +113,19 @@ def edit_menu_item(restaurant_id, menu_item_id):
                                menu_item=menu_item)
 
 
-@app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/delete/')
+@app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/delete/',
+           methods=['GET', 'POST'])
 def delete_menu_item(restaurant_id, menu_item_id):
     restaurant = Restaurant.get_by_id(restaurant_id)
     menu_item = MenuItem.get_by_id(menu_item_id)
-    return render_template('delete-menu-item.html',
-                           restaurant=restaurant,
-                           menu_item=menu_item)
+    if request.method == 'POST':
+        menu_item.delete()
+        return redirect(url_for('single_restaurant',
+                                restaurant_id=restaurant.id))
+    else:
+        return render_template('delete-menu-item.html',
+                               restaurant=restaurant,
+                               menu_item=menu_item)
 
 if __name__ == "__main__":
     app.config.update(
