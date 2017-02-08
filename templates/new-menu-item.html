@@ -18,5 +18,7 @@
         </label>
         <input type="submit" name="" value="Create">
     </form>
-    <a href="#">Cancel</a>
+    <a href="{{ url_for('single_restaurant', restaurant_id=restaurant.id) }}">
+        Cancel
+    </a>
 {% endblock %}
