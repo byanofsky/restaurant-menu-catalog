@@ -78,6 +78,7 @@ def new_menu_item(restaurant_id):
         restaurant = Restaurant.get_by_id(restaurant_id)
         return render_template('new-menu-item.html', restaurant=restaurant)
 
+
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/edit/')
 def edit_menu_item(restaurant_id, menu_item_id):
     restaurant = Restaurant.get_by_id(restaurant_id)
