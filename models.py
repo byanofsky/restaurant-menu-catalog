@@ -8,6 +8,11 @@ class Restaurant(Base):
     id = Column(Integer, Sequence('restaurant_id_seq'), primary_key=True)
     name = Column(String, nullable=False)
 
+    def update(self, name):
+        self.name = name
+        db_session.add(self)
+        db_session.commit()
+
     @classmethod
     def create(cls, name):
         db_session.add(Restaurant(name=name))
