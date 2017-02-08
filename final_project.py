@@ -60,10 +60,15 @@ def edit_restaurant(restaurant_id):
         return render_template('edit-restaurant.html', restaurant=restaurant)
 
 
-@app.route('/restaurant/<int:restaurant_id>/delete/')
+@app.route('/restaurant/<int:restaurant_id>/delete/',
+           methods=['GET', 'POST'])
 def delete_restaurant(restaurant_id):
     restaurant = Restaurant.get_by_id(restaurant_id)
-    return render_template('delete-restaurant.html', restaurant=restaurant)
+    if request.method == 'POST':
+        restaurant.delete()
+        return redirect(url_for('all_restaurants'))
+    else:
+        return render_template('delete-restaurant.html', restaurant=restaurant)
 
 
 @app.route('/restaurant/<int:restaurant_id>/menu/new/',
