@@ -2,6 +2,7 @@
 {% block title %}All Restaurants{% endblock %}
 {% block content %}
     <h1>All Restaurants</h1>
+    <div>
     {% for r in restaurants %}
         <div>
             <h3>
@@ -20,4 +21,9 @@
             </a>
         </div>
     {%endfor %}
+    </div>
+
+    <div>
+        <a href="{{ url_for('new_restaurant') }}">Create New Restaurant</a>
+    </div>
 {% endblock %}
