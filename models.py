@@ -17,6 +17,13 @@ class Restaurant(Base):
         db_session.delete(self)
         db_session.commit()
 
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
     @classmethod
     def create(cls, name):
         db_session.add(Restaurant(name=name))
@@ -51,6 +58,15 @@ class MenuItem(Base):
     def delete(self):
         db_session.delete(self)
         db_session.commit()
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price': self.price
+        }
 
     @classmethod
     def create(cls, name, description, price, restaurant_id):

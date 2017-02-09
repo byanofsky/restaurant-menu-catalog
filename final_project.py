@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from database import db_session
 from models import Restaurant, MenuItem
 
@@ -17,6 +17,12 @@ def all_restaurants():
     return render_template('all-restaurants.html', restaurants=restaurants)
 
 
+@app.route('/restaurants/JSON/')
+def all_restaurans_JSON():
+    restaurants = Restaurant.get_all()
+    return jsonify(restaurants=[r.serialize for r in restaurants])
+
+
 @app.route('/restaurant/<int:restaurant_id>/')
 def single_restaurant(restaurant_id):
     restaurant = Restaurant.get_by_id(restaurant_id)
@@ -24,6 +30,13 @@ def single_restaurant(restaurant_id):
     return render_template('single-restaurant.html',
                            restaurant=restaurant,
                            menu_items=menu_items)
+
+
+@app.route('/restaurant/<int:restaurant_id>/menu/JSON/')
+def single_restaurant_JSON(restaurant_id):
+    restaurant = Restaurant.get_by_id(restaurant_id)
+    menu_items = MenuItem.get_by_restaurant_id(restaurant_id)
+    return jsonify(menu_items=[i.serialize for i in menu_items])
 
 
 @app.route('/restaurant/new/',
@@ -78,6 +91,12 @@ def new_menu_item(restaurant_id):
     else:
         restaurant = Restaurant.get_by_id(restaurant_id)
         return render_template('new-menu-item.html', restaurant=restaurant)
+
+
+@app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/JSON/')
+def single_menu_item_JSON(restaurant_id, menu_item_id):
+    menu_item = MenuItem.get_by_id(menu_item_id)
+    return jsonify(menu_item=menu_item.serialize)
 
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_item_id>/edit/',
