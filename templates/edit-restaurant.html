@@ -7,7 +7,7 @@
             Name
             <input type="text" name="restaurant_name" value="{{ restaurant.name }}">
         </label>
-        <input type="submit" name="" value="Edit">
+        <button class="btn btn-default" type="submit">Submit</button>
     </form>
-    <a href="{{ url_for('all_restaurants') }}">Cancel</a>
+    <a class="btn btn-default" href="{{ url_for('all_restaurants') }}">Cancel</a>
 {% endblock %}

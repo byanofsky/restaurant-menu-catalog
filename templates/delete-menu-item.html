@@ -7,9 +7,9 @@
         Are you sure you'd like to delete "{{ menu_item.name }}"?
     </p>
     <form action="" method="post">
-        <input type="submit" name="" value="Confirm">
+        <button class="btn btn-default" type="submit">Confirm</button>
     </form>
-    <a href="{{ url_for('single_restaurant', restaurant_id=restaurant.id) }}">
+    <a class="btn btn-default" href="{{ url_for('single_restaurant', restaurant_id=restaurant.id) }}">
         Cancel
     </a>
 {% endblock %}

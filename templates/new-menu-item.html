@@ -16,9 +16,9 @@
             Price
             <input type="text" name="menu_item_price" value="">
         </label>
-        <input type="submit" name="" value="Create">
+        <button class="btn btn-default" type="submit">Submit</button>
     </form>
-    <a href="{{ url_for('single_restaurant', restaurant_id=restaurant.id) }}">
+    <a class="btn btn-default" href="{{ url_for('single_restaurant', restaurant_id=restaurant.id) }}">
         Cancel
     </a>
 {% endblock %}
