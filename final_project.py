@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, \
+    jsonify, flash
 from database import db_session
 from models import Restaurant, MenuItem
 
@@ -45,6 +46,7 @@ def new_restaurant():
     if request.method == 'POST':
         restaurant_name = request.form['restaurant_name']
         Restaurant.create(restaurant_name)
+        flash('New restaurant created')
         return redirect(url_for('all_restaurants'))
     else:
         return render_template('new-restaurant.html')
@@ -57,6 +59,7 @@ def edit_restaurant(restaurant_id):
     if request.method == 'POST':
         restaurant_name = request.form['restaurant_name']
         restaurant.update(name=restaurant_name)
+        flash('Restaurant edited')
         return redirect(url_for('all_restaurants'))
     else:
         return render_template('edit-restaurant.html', restaurant=restaurant)
@@ -68,6 +71,7 @@ def delete_restaurant(restaurant_id):
     restaurant = Restaurant.get_by_id(restaurant_id)
     if request.method == 'POST':
         restaurant.delete()
+        flash('Restaurant deleted')
         return redirect(url_for('all_restaurants'))
     else:
         return render_template('delete-restaurant.html', restaurant=restaurant)
@@ -86,6 +90,7 @@ def new_menu_item(restaurant_id):
             price=menu_item_price,
             restaurant_id=restaurant_id
         )
+        flash('New menu item created')
         return redirect(url_for('single_restaurant',
                                 restaurant_id=restaurant_id))
     else:
@@ -113,6 +118,7 @@ def edit_menu_item(restaurant_id, menu_item_id):
             description=menu_item_description,
             price=menu_item_price
         )
+        flash('Menu item edited')
         return redirect(url_for('single_restaurant',
                                 restaurant_id=restaurant_id))
     else:
@@ -128,6 +134,7 @@ def delete_menu_item(restaurant_id, menu_item_id):
     menu_item = MenuItem.get_by_id(menu_item_id)
     if request.method == 'POST':
         menu_item.delete()
+        flash('Menu item deleted')
         return redirect(url_for('single_restaurant',
                                 restaurant_id=restaurant.id))
     else:
